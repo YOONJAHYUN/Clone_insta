@@ -20,3 +20,11 @@ def create(request):
 
     context = {'form':form}
     return render(request, 'posts/create.html', context) 
+
+
+def detail(request, post_pk):
+    form = Post.objects.get(pk=post_pk)
+    context = {
+        'form':form
+    }
+    return render(request, 'posts/post.html', context)

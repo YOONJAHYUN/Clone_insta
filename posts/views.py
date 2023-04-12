@@ -14,7 +14,7 @@ def create(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             form = form.save()
-            return redirect('post:index')
+            return redirect('posts:index')
     else:
         form = PostForm()
 
@@ -28,3 +28,11 @@ def detail(request, post_pk):
         'form':form
     }
     return render(request, 'posts/post.html', context)
+
+
+def delete(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    if request.user == post.user:
+        post.delete()
+        return redirect('posts:index')
+    return redirect('posts:detail', post.pk)

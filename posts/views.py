@@ -22,17 +22,17 @@ def create(request):
     return render(request, 'posts/create.html', context) 
 
 
-def detail(request, post_pk):
-    form = Post.objects.get(pk=post_pk)
-    context = {
-        'form':form
-    }
-    return render(request, 'posts/post.html', context)
+# def detail(request, post_pk):
+#     form = Post.objects.get(pk=post_pk)
+#     context = {
+#         'form':form
+#     }
+#     return render(request, 'posts/post.html', context)
 
 
 def delete(request, post_pk):
     post = Post.objects.get(pk=post_pk)
-    if request.user == post.user:
-        post.delete()
-        return redirect('posts:index')
-    return redirect('posts:detail', post.pk)
+    # if request.user == post.user:
+    post.delete()
+    return redirect('posts:index')
+    # return redirect('posts:index')

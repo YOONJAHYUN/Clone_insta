@@ -1,8 +1,21 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{% load static %}
 {% block content %}
   <h1>This is Index</h1>
   {% for post in posts %}
-    <a href="{% url 'posts:detail' post.pk %}">{{post.content}}</a>
+    게시글 번호 :{{post.pk}}
+    <br>
 
+    <!-- 사진 첨부 -->
+    <div>
+      {% if post.image %}
+        <img src="{{ post.image.url }}" alt="">
+        <div>사진</div>
+      {% endif %}
+    </div>
+    <div></div>
+    {{post.content}}
+    <a href="{% url 'posts:delete' post.pk%}"><input type="submit" class="text-white bg-danger" value="삭제"></a>
+    <br>
+    <hr>
   {% endfor %}
 {% endblock content %}
